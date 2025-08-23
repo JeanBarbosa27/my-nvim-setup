@@ -1,4 +1,9 @@
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
-vim.keymap.set("n", "<space>x", ":.lua<CR>")
-vim.keymap.set("v", "<space>x", ":lua<CR>")
+local set = vim.keymap.set
 
+-- normal mode mappings
+set("n", "<space><space>r", "<cmd>source %<CR>")
+set("n", "<space>r", ":.lua<CR>")
+set("n", "<space>x", ":bd<CR>")
+
+-- visual mode mappings
+set("v", "<space>r", ":lua<CR>")
