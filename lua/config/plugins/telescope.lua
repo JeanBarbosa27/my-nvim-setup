@@ -22,6 +22,9 @@ function set_normal_key_maps()
 
   -- find text in the current buffer
   set("n", "<space>ft", builtins.current_buffer_fuzzy_find)
+
+  -- find text in the current project
+  set("n", "<space>F", builtins.live_grep)
 end
 
 return {
@@ -43,6 +46,7 @@ return {
           find_files = { theme = "ivy" },
           help_tags = { theme = "ivy" },
           lsp_references = { theme = "ivy" },
+          live_grep = { theme = "ivy" },
         }
       }
       set_normal_key_maps()
