@@ -15,6 +15,13 @@ return {
       },
     },
     config = function()
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+      })
+
       require("lspconfig").lua_ls.setup {}
 
       -- Auto format the file when it's saved
