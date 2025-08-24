@@ -14,6 +14,13 @@ function set_normal_key_maps()
     builtins.find_files({ cwd = vim.fn.stdpath("config") })
   end)
 
+  -- find editor packages
+  set("n", "<space>ep", function()
+    builtins.find_files {
+      cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+    }
+  end)
+
   -- find help tags
   set("n", "<space>fh", builtins.help_tags)
 
