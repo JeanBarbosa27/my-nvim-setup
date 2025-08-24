@@ -59,7 +59,10 @@ return {
           fzf = {}
         }
       }
+
       require("telescope").load_extension("fzf")
+      require("config.telescope.multigrep").setup()
+
       set_normal_key_maps()
     end
   }
