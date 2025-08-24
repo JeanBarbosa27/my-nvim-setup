@@ -47,8 +47,12 @@ return {
           help_tags = { theme = "ivy" },
           lsp_references = { theme = "ivy" },
           live_grep = { theme = "ivy" },
+        },
+        extensions = {
+          fzf = {}
         }
       }
+      require("telescope").load_extension("fzf")
       set_normal_key_maps()
     end
   }
