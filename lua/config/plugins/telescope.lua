@@ -6,8 +6,18 @@ function set_normal_key_maps()
   -- find buffers
   set("n", "<space>fb", builtins.buffers)
 
-  -- find directory
-  set("n", "<space>fd", builtins.find_files)
+  -- find files in project root
+  set("n", "<space>fD", builtins.find_files)
+
+  -- find files in current file directory
+  set("n", "<space>fd", function()
+    local current_file = vim.api.nvim_buf_get_name(0)
+    local current_dir = vim.fn.fnamemodify(current_file, ":h")
+    builtins.find_files({
+      cwd = current_dir,
+      prompt_title = "Files in current directory",
+    })
+  end)
 
   -- find editor config
   set("n", "<space>ec", function()
