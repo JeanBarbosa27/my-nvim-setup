@@ -58,7 +58,12 @@ return {
     config = function()
       require("telescope").setup {
         pickers = {
-          buffers = { theme = "ivy" },
+          buffers = {
+            theme = "ivy",
+            sort_mru = true,
+            ignore_current_buffer = true,
+            sort_lastused = true,
+          },
           current_buffer_fuzzy_find = { theme = "ivy" },
           find_files = { theme = "ivy" },
           help_tags = { theme = "ivy" },
