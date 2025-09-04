@@ -12,7 +12,8 @@ Here are what you need to install locally, in order to have it working properly:
 - gettext;
 - cmake;
 - curl;
-- ripgrep (it's a Telescope dependecy);
+- ripgrep (it's a [Telescope](https://github.com/nvim-telescope/telescope.nvim) dependecy);
+- Github CLI (it's a [Octo](https://github.com/pwntester/octo.nvim) dependency)
 
 🏗️ **This document is still a work in progress** 🏗️
 
