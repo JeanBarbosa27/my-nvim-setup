@@ -2,21 +2,26 @@ local set = vim.keymap.set
 
 -- NORMAL MODE MAPPINGS
 
--- source current file
-set("n", "<space><space>r", "<cmd>source %<CR>")
--- execute current file
-set("n", "<space>r", ":.lua<CR>")
-
+-- <BUFFERS>
 -- close current buffer
-set("n", "<space>x", ":bd<CR>")
+set("n", "<space>bx", ":bd<CR>")
 
 -- save current buffer
-set("n", "<space>w", ":w<CR>")
+set("n", "<space>bw", ":w<CR>")
 
 -- save and close current buffer
-set("n", "<space>X", ":w<CR>:bd<CR>")
+set("n", "<space>bX", ":w<CR>:bd<CR>")
+
 -- close all other buffers
 set("n", "<space>bo", "<cmd>BOnly<CR>", { desc = "Close all other buffers" })
+-- </BUFFERS>
+
+-- <FILE>
+-- source current file
+set("n", "<space><space>r", "<cmd>source %<CR>")
+
+-- execute current file
+set("n", "<space>r", ":.lua<CR>")
 
 -- copy file name to the clipboard
 set("n", "<space>cf", function()
@@ -31,6 +36,8 @@ set("n", "<space>cp", function()
   vim.fn.setreg("+", full_path)
   print(string.format("Copied %s to clipboard!", full_path))
 end)
+-- </FILE>
 
 -- VISUAL MODE MAPPINGS
+-- Execute selected lua code
 set("v", "<space>r", ":lua<CR>")
