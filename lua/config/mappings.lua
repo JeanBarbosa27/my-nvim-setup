@@ -15,6 +15,8 @@ set("n", "<space>w", ":w<CR>")
 
 -- save and close current buffer
 set("n", "<space>X", ":w<CR>:bd<CR>")
+-- close all other buffers
+set("n", "<space>bo", "<cmd>BOnly<CR>", { desc = "Close all other buffers" })
 
 -- copy file name to the clipboard
 set("n", "<space>cf", function()
