@@ -31,6 +31,27 @@ function set_normal_key_maps()
     }
   end)
 
+  -- ssh config
+  local ssh_folder = "~/.ssh"
+
+  set("n", "<space>es", function()
+    vim.cmd.edit(vim.fs.joinpath(ssh_folder, "/config"))
+  end, { desc = "Edit ssh config" })
+
+  set("n", "<space>sc", function()
+    builtins.find_files { cwd = ssh_folder }
+  end, { desc = "Find in SSH config" })
+
+  -- edit zsh config
+  set("n", "<space>ez", function()
+    vim.cmd.edit("~/.zshrc")
+  end, { desc = "Edit zsh config" })
+
+  -- find zsh config
+  set("n", "<space>zc", function()
+    builtins.find_files { cwd = "~/.config/zsh", hidden = true }
+  end)
+
   -- find help tags
   set("n", "<space>fh", builtins.help_tags)
 
