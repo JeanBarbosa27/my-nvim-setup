@@ -4,7 +4,7 @@ return {
     dependencies = {
       {
         "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
+        ft = { "lua", "python" }, -- only load on lua files
         opts = {
           library = {
             -- See the configuration section for more details
@@ -22,7 +22,21 @@ return {
         update_in_insert = false,
       })
 
+      -- Setup lua LSP
       require("lspconfig").lua_ls.setup {}
+
+      -- Setyp Python LSP
+      require("lspconfig").pyright.setup {
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "openFilesOnly",
+            }
+          }
+        }
+      }
 
       -- Auto format the file when it's saved
       vim.api.nvim_create_autocmd('LspAttach', {
