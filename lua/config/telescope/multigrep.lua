@@ -4,6 +4,8 @@ local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
 local sorters = require("telescope.sorters")
 
+local utils = require("config.utils")
+
 local M = {}
 local live_multigrep = function(opts)
   opts = opts or {}
@@ -53,7 +55,7 @@ local live_multigrep = function(opts)
 end
 
 M.setup = function()
-  vim.keymap.set("n", "<space>fg", live_multigrep)
+  utils.set_nkey("fg", live_multigrep)
 end
 
 return M
