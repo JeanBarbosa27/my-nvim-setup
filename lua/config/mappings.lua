@@ -1,5 +1,3 @@
-local set = vim.keymap.set
-
 local utils = require("config.utils")
 
 -- NORMAL MODE MAPPINGS
@@ -13,6 +11,9 @@ utils.set_nkey("bx", ":bd<CR>")
 
 -- save current buffer
 utils.set_nkey("bw", ":w<CR>")
+
+-- save all buffers
+utils.set_nkey("bW", ":wa<CR>")
 
 -- save and close current buffer
 utils.set_nkey("bX", ":w<CR>:bd<CR>")
