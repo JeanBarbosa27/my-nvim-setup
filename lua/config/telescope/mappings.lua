@@ -65,6 +65,12 @@ function M.find_config_files(builtins)
   utils.set_nkey("fh", builtins.help_tags)
 end
 
+function M.lsp_diagnostics(builtins)
+  utils.set_nkey("cm", function()
+    builtins.diagnostics({ bufnr = 0 })
+  end, { desc = "Diagnostics for current buffer" })
+end
+
 function M.set_normal_key_maps()
   -- check out for ":Telescope builtin" for more builtin function references
   local builtins = require("telescope.builtin")
@@ -72,6 +78,7 @@ function M.set_normal_key_maps()
   M.find_in_buffer(builtins)
   M.find_in_workspace(builtins)
   M.find_config_files(builtins)
+  M.lsp_diagnostics(builtins)
 end
 
 return M
