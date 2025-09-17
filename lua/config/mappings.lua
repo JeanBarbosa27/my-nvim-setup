@@ -49,4 +49,4 @@ end)
 utils.set_vkey("r", ":lua<CR>")
 
 -- copy selection
-utils.set_vkey("y", ":CopySelection")
+utils.set_vkey("y", ":CopySelection<CR>")
