@@ -40,6 +40,7 @@ function M.copy_selection_to_clipboard()
   end
 
   vim.fn.setreg("+", table.concat(lines, "\n"))
+  print("Copied selected text to clipboard")
 end
 
 function M.get_file_name()
