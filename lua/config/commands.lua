@@ -22,3 +22,7 @@ end, { desc = "Copy current file directory path" })
 set_command("CopyProjectRootPath", function()
   utils.copy_to_clipboard(utils.get_project_root_path())
 end, { desc = "Copy project root path, basically from where editor was opened" })
+
+set_command("CopySelection", function()
+  utils.copy_selection_to_clipboard()
+end, { desc = "Copy selected text to the clipboard", range = true })

@@ -47,3 +47,6 @@ end)
 -- VISUAL MODE MAPPINGS
 -- Execute selected lua code
 utils.set_vkey("r", ":lua<CR>")
+
+-- copy selection
+utils.set_vkey("y", ":CopySelection")
