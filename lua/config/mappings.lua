@@ -22,6 +22,15 @@ utils.set_nkey("bX", ":w<CR>:bd<CR>")
 utils.set_nkey("bo", "<cmd>BOnly<CR>", { desc = "Close all other buffers" })
 -- </BUFFERS>
 
+-- <QUICK FIX LIST>
+utils.set_key("n", "<M-q>", "lua vim.diagnostic.setqflist()") -- search for quick fixes
+utils.set_key("n", "<M-o>", "<cmd>copen<CR>")                 -- opens quick fix list
+utils.set_key("n", "<M-c>", "<cmd>cclose<CR>")                -- closes quick fix list
+-- navigate through quick fix items
+utils.set_key("n", "<M-k>", "<cmd>cprev<CR>")
+utils.set_key("n", "<M-j>", "<cmd>cnext<CR>")
+-- </QUICK FIX LIST>
+
 -- <FILE>
 -- source current file
 utils.set_nkey("<space>r", "<cmd>source %<CR>")
