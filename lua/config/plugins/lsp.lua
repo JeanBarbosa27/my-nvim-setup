@@ -22,11 +22,11 @@ return {
         update_in_insert = false,
       })
 
-      -- Setup lua LSP
-      require("lspconfig").lua_ls.setup {}
-
-      -- Setyp Python LSP
-      require("lspconfig").pyright.setup {
+      -- region setup language servers
+      local lsp_config = require("lspconfig")
+      lsp_config.lua_ls.setup {}
+      lsp_config.markdown_oxide.setup {}
+      lsp_config.pyright.setup {
         settings = {
           python = {
             analysis = {
@@ -37,6 +37,9 @@ return {
           }
         }
       }
+
+      lsp_config.yamlls.setup {}
+      -- endregion setup language servers
 
       -- Auto format the file when it's saved
       vim.api.nvim_create_autocmd('LspAttach', {
