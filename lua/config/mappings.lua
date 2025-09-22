@@ -31,6 +31,26 @@ utils.set_key("n", "<M-k>", "<cmd>cprev<CR>")
 utils.set_key("n", "<M-j>", "<cmd>cnext<CR>")
 -- </QUICK FIX LIST>
 
+-- <TERMINAL>
+local job_id = 0
+utils.set_nkey("st", function()
+  -- This opens a terminal on the right. Once this is opened, type "<C-\><C-n>" to go to normal mode
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd("L")
+  -- FIXME: Find a way to get this as percentage, since on small screens this breaks the view
+  vim.api.nvim_win_set_width(0, 110)
+
+  job_id = vim.bo.channel
+end)
+
+utils.set_nkey("ex", function()
+  -- This is only an example on how we can use the terminal into nvim, but imagine running commands like unit tests,
+  -- builds, deploy, etc
+  vim.fn.chansend(job_id, { "ls -al \r\n" })
+end)
+-- </TERMINAL>
+
 -- <FILE>
 -- source current file
 utils.set_nkey("<space>r", "<cmd>source %<CR>")
