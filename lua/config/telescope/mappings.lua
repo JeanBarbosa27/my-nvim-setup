@@ -18,17 +18,22 @@ end
 
 function M.find_in_workspace(builtins)
   -- find files in project root
-  utils.set_nkey("fD", builtins.find_files)
+  utils.set_nkey("fp", function()
+    builtins.find_files({ hidden = true })
+  end)
 
   -- find files in current file directory
   utils.set_nkey("fd", function()
     local current_file = vim.api.nvim_buf_get_name(0)
     local current_dir = vim.fn.fnamemodify(current_file, ":h")
-    builtins.find_files({ cwd = current_dir, prompt_title = "Files in current directory", })
+    builtins.find_files({ cwd = current_dir, prompt_title = "Files in current directory", hidden = true })
   end)
 
   -- find text
-  utils.set_nkey("F", builtins.live_grep)
+  utils.set_nkey("F", function()
+    builtins.live_grep({ hidden = true })
+  end
+  )
 
   -- find symbols
   utils.set_nkey("fw", builtins.lsp_workspace_symbols, { desc = "Find symbos in current workspace" })
