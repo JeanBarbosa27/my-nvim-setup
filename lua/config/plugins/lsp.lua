@@ -1,3 +1,21 @@
+local function setup_language_servers(config)
+  config.lua_ls.setup {}
+  config.markdown_oxide.setup {}
+  config.pyright.setup {
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = "openFilesOnly",
+        }
+      }
+    }
+  }
+
+  config.yamlls.setup {}
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -22,24 +40,7 @@ return {
         update_in_insert = false,
       })
 
-      -- region setup language servers
-      local lsp_config = require("lspconfig")
-      lsp_config.lua_ls.setup {}
-      lsp_config.markdown_oxide.setup {}
-      lsp_config.pyright.setup {
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = "openFilesOnly",
-            }
-          }
-        }
-      }
-
-      lsp_config.yamlls.setup {}
-      -- endregion setup language servers
+      setup_language_servers(require("lspconfig"))
 
       -- Auto format the file when it's saved
       vim.api.nvim_create_autocmd('LspAttach', {
