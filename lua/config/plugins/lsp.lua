@@ -8,8 +8,8 @@ local function enable_folding_expression()
   vim.o.foldenable = true
 end
 
-local function setup_language_servers(config)
-  config.lua_ls.setup {}
+local function setup_language_servers(config, capabilities)
+  config.lua_ls.setup { capabilities = capabilities }
   config.markdown_oxide.setup {}
   config.pyright.setup {
     settings = {
@@ -30,6 +30,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "saghen/blink.cmp",
       {
         "folke/lazydev.nvim",
         ft = { "lua", "python" }, -- only load on lua files
@@ -50,7 +51,7 @@ return {
         update_in_insert = false,
       })
 
-      setup_language_servers(require("lspconfig"))
+      setup_language_servers(require("lspconfig"), require('blink.cmp').get_lsp_capabilities())
       enable_folding_expression()
 
       -- Auto format the file when it's saved
