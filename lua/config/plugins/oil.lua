@@ -2,8 +2,8 @@ local mappings = require("config.oil.mappings")
 
 return {
   {
-    'stevearc/oil.nvim',
-    ---@module 'oil'
+    "stevearc/oil.nvim",
+    ---@module "oil"
     ---@type oil.SetupOpts
     opts = {},
     -- Optional dependencies
@@ -18,6 +18,10 @@ return {
     lazy = false,
     config = function()
       require("oil").setup {
+        view_options = {
+          -- Show files and directories that start with "."
+          show_hidden = true,
+        },
         mappings.set_normal_key_maps()
       }
     end
