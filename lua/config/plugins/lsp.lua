@@ -1,3 +1,13 @@
+-- This function is used to enable the folding via LSP. It's usefull to fold yaml and Python (which are indent based)
+local function enable_folding_expression()
+  vim.o.foldmethod = "expr"
+  -- vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+  vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+  vim.o.foldlevel = 99
+  vim.o.foldlevelstart = 99
+  vim.o.foldenable = true
+end
+
 local function setup_language_servers(config)
   config.lua_ls.setup {}
   config.markdown_oxide.setup {}
@@ -41,6 +51,7 @@ return {
       })
 
       setup_language_servers(require("lspconfig"))
+      enable_folding_expression()
 
       -- Auto format the file when it's saved
       vim.api.nvim_create_autocmd('LspAttach', {
