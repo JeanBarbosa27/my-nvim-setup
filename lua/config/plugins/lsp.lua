@@ -10,6 +10,22 @@ end
 
 local function setup_language_servers(config, capabilities)
   config.lua_ls.setup { capabilities = capabilities }
+
+  config.groovyls.setup {
+    -- o have this installed, need to install manually:
+    -- git clone https://github.com/prominic/groovy-language-server ~/.local/share/groovy-language-server
+    -- cd ~/.local/share/groovy-language-server
+    -- gradle build
+
+    cmd = {
+      "java",
+      "-jar",
+      vim.fn.expand("~/.local/share/groovy-language-server/build/libs/groovy-language-server-all.jar")
+    },
+    filetypes = { "groovy" },
+    root_dir = require("lspconfig.util").root_pattern("settings.gradle", "build.gradle", ".git"),
+  }
+
   config.markdown_oxide.setup {}
   config.pyright.setup {
     settings = {
