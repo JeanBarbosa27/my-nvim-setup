@@ -35,7 +35,7 @@ function M.find_in_workspace(builtins)
   end
   )
 
-  -- find symbols
+  -- find symbols in the whole project
   utils.set_nkey("fw", builtins.lsp_workspace_symbols, { desc = "Find symbos in current workspace" })
 end
 

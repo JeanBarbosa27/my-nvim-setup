@@ -10,7 +10,12 @@ return {
       "rcarriga/nvim-dap-ui",
     },
     config = function()
-      require("java").setup()
+      require("java").setup({
+        jdk = {
+          auto_install = false,
+          version = 21,
+        }
+      })
     end,
   }
 }
