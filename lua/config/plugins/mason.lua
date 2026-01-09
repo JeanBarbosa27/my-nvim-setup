@@ -12,6 +12,8 @@ return {
         -- add "rust_analyzer" here to install rust, for example
         ensure_installed = {
           "lua_ls",
+          "html",
+          "lemminx",
           "kotlin_language_server",
           "yamlls",
         }

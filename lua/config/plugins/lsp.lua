@@ -11,7 +11,19 @@ end
 local function setup_language_servers(config, capabilities)
   config.lua_ls.setup { capabilities = capabilities }
 
-  config.kotlin_language_server.setup {}
+  config.html.setup {
+    filetypes = { "html", "xml" }
+  }
+  config.lemminx.setup {
+    filetypes = { "xml", "xsd", "xsl", "xslt" }
+  }
+
+  config.kotlin_language_server.setup {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+    end,
+  }
 
   config.pyright.setup {
     settings = {
