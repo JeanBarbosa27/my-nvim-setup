@@ -1,3 +1,5 @@
+local mappings = require("config.lsp.mappings")
+
 -- This function is used to enable the folding via LSP. It's usefull to fold yaml and Python (which are indent based)
 local function enable_folding_expression()
   vim.o.foldmethod = "expr"
@@ -22,6 +24,20 @@ local function setup_language_servers(config, capabilities)
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        pattern = "*.kt",
+        callback = function()
+          vim.lsp.buf.code_action({
+            context = {
+              only = { "source.organizeImports" },
+              diagnostics = {},
+            },
+            apply = true,
+          })
+        end
+      })
     end,
   }
 
@@ -74,6 +90,9 @@ return {
         callback = function(args)
           local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
           if not client then return end
+
+          -- Set LSP mappings
+          mappings.set_nkey_mappings(args)
 
           if client:supports_method('textDocument/formatting') then
             vim.api.nvim_create_autocmd('BufWritePre', {
