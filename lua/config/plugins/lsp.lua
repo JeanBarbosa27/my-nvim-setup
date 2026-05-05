@@ -25,9 +25,10 @@ local function setup_language_servers(config, capabilities)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
 
+      local group = vim.api.nvim_create_augroup("kotlin_organize_imports_" .. bufnr, { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
+        group = group,
         buffer = bufnr,
-        pattern = "*.kt",
         callback = function()
           vim.lsp.buf.code_action({
             context = {
