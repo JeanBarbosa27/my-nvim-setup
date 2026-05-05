@@ -1,40 +1,47 @@
 local telescope_key_maps = require("config.telescope.mappings")
 
 return {
-  {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make"
-      }
-    },
-    config = function()
-      require("telescope").setup {
-        pickers = {
-          buffers = {
-            theme = "ivy",
-            sort_mru = true,
-            ignore_current_buffer = true,
-            sort_lastused = true,
-          },
-          current_buffer_fuzzy_find = { theme = "ivy" },
-          find_files = { theme = "ivy" },
-          help_tags = { theme = "ivy" },
-          lsp_references = { theme = "ivy" },
-          live_grep = { theme = "ivy" },
+    {
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.8",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make"
+            }
         },
-        extensions = {
-          fzf = {}
-        }
-      }
+        config = function()
+            local telescope_sorters = require("telescope.sorters")
+            require("telescope").setup {
+                defaults = {
+                    file_sorter = telescope_sorters.get_fuzzy_file,
+                    generic_sorter = telescope_sorters.get_generic_fuzzy_sorter,
+                },
+                pickers = {
+                    buffers = {
+                        theme = "ivy",
+                        sort_mru = true,
+                        ignore_current_buffer = true,
+                        sort_lastused = true,
+                    },
+                    current_buffer_fuzzy_find = { theme = "ivy" },
+                    find_files = { theme = "ivy" },
+                    help_tags = { theme = "ivy" },
+                    lsp_references = { theme = "ivy" },
+                    live_grep = { theme = "ivy" },
+                },
+                extensions = {
+                    fzf = {
+                        case_mode = "smart_case", -- "smart_case" | "ignore_case" | "respect_case"
+                    }
+                }
+            }
 
-      require("telescope").load_extension("fzf")
-      require("config.telescope.multigrep").setup()
+            require("telescope").load_extension("fzf")
+            require("config.telescope.multigrep").setup()
 
-      telescope_key_maps.set_normal_key_maps()
-    end
-  }
+            telescope_key_maps.set_normal_key_maps()
+        end
+    }
 }
