@@ -3,6 +3,23 @@ local utils = require("config.utils")
 local set_command = vim.api.nvim_create_user_command
 
 set_command("CloseOtherBuffers", function()
+  local current = vim.api.nvim_get_current_buf()
+  local closed = 0
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current
+        and vim.api.nvim_buf_is_loaded(buf)
+        and vim.bo[buf].buflisted
+        and not vim.bo[buf].modified
+    then
+      vim.api.nvim_buf_delete(buf, {})
+      closed = closed + 1
+    end
+  end
+  print(("Closed %d buffer(s)"):format(closed))
+end, { desc = "Close all buffers other than current" })
+
+set_command("CloseOtherBuffersSimple", function()
   local current_buffer_number = vim.fn.bufnr("%")
   vim.cmd("bufdo exe 'if bufnr() != " .. current_buffer_number .. " | bdelete | endif'")
 end, { desc = "Close all buffers other than current" })
