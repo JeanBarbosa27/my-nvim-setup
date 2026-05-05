@@ -43,3 +43,11 @@ end, { desc = "Copy project root path, basically from where editor was opened" }
 set_command("CopySelection", function()
   utils.copy_selection_to_clipboard()
 end, { desc = "Copy selected text to the clipboard", range = true })
+
+set_command("PRFiles", function()
+  vim.cmd("DiffviewOpen main...HEAD")
+end, { desc = "A shortcut for DiffviewOpen main...HEAD, to make it easier" })
+
+set_command("PRFilesMaster", function()
+  vim.cmd("DiffviewOpen master...HEAD")
+end, { desc = "A shortcut for DiffviewOpen master...HEAD, to make it easier" })
