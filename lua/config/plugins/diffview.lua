@@ -1,4 +1,4 @@
-local mappings = require("config.diffview.mappings")
+require("config.diffview.mappings").set_normal_key_maps()
 
 return {
   {
