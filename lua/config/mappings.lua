@@ -19,7 +19,7 @@ utils.set_nkey("bW", ":wa<CR>")
 utils.set_nkey("bX", ":w<CR>:bd<CR>")
 
 -- close all other buffers
-utils.set_nkey("bo", "CloseOtherBuffers", { desc = "Close all other buffers" })
+utils.set_nkey("bo", "<cmd>CloseOtherBuffers<CR>", { desc = "Close all other buffers" })
 -- </BUFFERS>
 
 -- <QUICK FIX LIST>
