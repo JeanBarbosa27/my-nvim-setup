@@ -1,37 +1,31 @@
 local utils = require("config.utils")
 
--- NORMAL MODE MAPPINGS
+-- region normal mode
+-- region buffers
+utils.set_nkey("bl", utils.list_buffers, { desc = "List buffers" })
+utils.set_nkey("bx", utils.close_current_buffer, { desc = "Close current buffer" })
+utils.set_nkey("bw", utils.save_current_buffer, { desc = "Save current buffer" })
+utils.set_nkey("bW", utils.save_all_buffers, { desc = "Save all buffers" })
+utils.set_nkey("bX", utils.save_and_close_current_buffer, { desc = "Save and close current buffer" })
+utils.set_nkey("bo", utils.close_other_buffers, { desc = "Close all other buffers" })
+-- endregion buffers
 
--- <BUFFERS>
--- list buffers
-utils.set_nkey("bl", ":ls<CR>")
+-- region windows
+utils.set_nkey("X", utils.save_and_close_all_windows, { desc = "Save and close all windows" })
+utils.set_nkey("q", utils.force_close_current_window, { desc = "Force close current windows" })
+utils.set_nkey("Q", utils.force_close_all_windows, { desc = "Force close all windows" })
+-- endregion windows
 
--- close current buffer
-utils.set_nkey("bx", ":bd<CR>")
-
--- save current buffer
-utils.set_nkey("bw", ":w<CR>")
-
--- save all buffers
-utils.set_nkey("bW", ":wa<CR>")
-
--- save and close current buffer
-utils.set_nkey("bX", ":w<CR>:bd<CR>")
-
--- close all other buffers
-utils.set_nkey("bo", "<cmd>CloseOtherBuffers<CR>", { desc = "Close all other buffers" })
--- </BUFFERS>
-
--- <QUICK FIX LIST>
+-- region quickfix list
 utils.set_key("n", "<M-q>", "lua vim.diagnostic.setqflist()") -- search for quick fixes
 utils.set_key("n", "<M-o>", "<cmd>copen<CR>")                 -- opens quick fix list
 utils.set_key("n", "<M-c>", "<cmd>cclose<CR>")                -- closes quick fix list
 -- navigate through quick fix items
 utils.set_key("n", "<M-k>", "<cmd>cprev<CR>")
 utils.set_key("n", "<M-j>", "<cmd>cnext<CR>")
--- </QUICK FIX LIST>
+-- endregion quickfix list
 
--- <TERMINAL>
+-- region terminal
 local job_id = 0
 utils.set_nkey("st", function()
   -- This opens a terminal on the right. Once this is opened, type "<C-\><C-n>" to go to normal mode
@@ -49,33 +43,24 @@ utils.set_nkey("ex", function()
   -- builds, deploy, etc
   vim.fn.chansend(job_id, { "ls -al \r\n" })
 end)
--- </TERMINAL>
+-- endregion terminal
 
--- <FILE>
--- source current file
-utils.set_nkey("<space>r", "<cmd>source %<CR>")
+-- region files
+utils.set_nkey("<space>r", utils.source_current_file, { desc = "Source current file" })
+utils.set_nkey("r", utils.execute_current_file, { desc = "Execute current file" })
+utils.set_nkey("cfn", "<cmd>CopyFileName<CR>", { desc = "Copy current file name to clipboard" })
+utils.set_nkey("cfp", "<cmd>CopyFilePath<CR>", { desc = "Copy current file full path to clipboard" })
+utils.set_nkey("cfr", "<cmd>CopyRelativeFilePath<CR>", { desc = "Copy current file relative path to clipboard" })
+utils.set_nkey("crp", "<cmd>CopyProjectRootPath<CR>", { desc = "Copy project root path to clipboard" })
+utils.set_nkey("cdp", "<cmd>CopyDirectoryPath<CR>", { desc = "Copy current directory full path to clipboard" })
+utils.set_nkey("cdr", "<cmd>CopyRelativeDirecoryPath<CR>", { desc = "Copy current directory relative path to clipboard" })
+-- endregion files
+-- endregion normal mode
 
--- execute current file
-utils.set_nkey("r", ":.lua<CR>")
-
--- copy file name to the clipboard
-utils.set_nkey("cf", function()
-  local file_name = vim.fn.expand("%:t")
-  vim.fn.setreg("+", file_name)
-  print(string.format("Copied %s to clipboard!", file_name))
-end)
-
--- copy full file path to the clipboard
-utils.set_nkey("cp", function()
-  local full_path = vim.api.nvim_buf_get_name(0)
-  vim.fn.setreg("+", full_path)
-  print(string.format("Copied %s to clipboard!", full_path))
-end)
--- </FILE>
-
--- VISUAL MODE MAPPINGS
+-- region visual mode
 -- Execute selected lua code
 utils.set_vkey("r", ":lua<CR>")
 
 -- copy selection
 utils.set_vkey("y", ":CopySelection<CR>")
+-- endregion visual mode

@@ -29,12 +29,20 @@ set_command("CopyFileName", function()
 end, { desc = "Copy file name to the clipboard" })
 
 set_command("CopyFilePath", function()
-  utils.copy_to_clipboard(utils.get_file_path())
+  utils.copy_to_clipboard(utils.get_current_file_path())
 end, { desc = "Copy full file path to the clipboard" })
+
+set_command("CopyRelativeFilePath", function()
+  utils.copy_to_clipboard(utils.get_current_file_relative_path())
+end, { desc = "Copy current file relative path to clipboard" })
 
 set_command("CopyDirectoryPath", function()
   utils.copy_to_clipboard(utils.get_current_directory_path())
-end, { desc = "Copy current file directory path" })
+end, { desc = "Copy current file directory full path to clipboard" })
+
+set_command("CopyRelativeDirecoryPath", function()
+  utils.copy_to_clipboard(utils.get_current_directory_relative_path())
+end, { desc = "Copy current directory relative path to clipboard" })
 
 set_command("CopyProjectRootPath", function()
   utils.copy_to_clipboard(utils.get_project_root_path())
