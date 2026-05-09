@@ -10,39 +10,18 @@ local function enable_folding_expression()
   vim.o.foldenable = true
 end
 
-local function setup_language_servers(config, capabilities)
-  config.lua_ls.setup { capabilities = capabilities }
+local function setup_language_servers()
+  -- Global defaults applied to every server
+  vim.lsp.config("*", {
+    capabilities = require("blink.cmp").get_lsp_capabilities(),
+  })
 
-  config.html.setup {
-    filetypes = { "html", "xml" }
-  }
-  config.lemminx.setup {
-    filetypes = { "xml", "xsd", "xsl", "xslt" }
-  }
+  vim.lsp.config("lua_ls", {})
+  vim.lsp.config("yamlls", {})
+  vim.lsp.config("html", { filetypes = { "html", "xml" } })
+  vim.lsp.config("lemmix", { filetypes = { "xml", "xsd", "xsl", "xslt" } })
 
-  config.kotlin_language_server.setup {
-    on_attach = function(client, bufnr)
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-
-      local group = vim.api.nvim_create_augroup("kotlin_organize_imports_" .. bufnr, { clear = true })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = group,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = { "source.organizeImports" },
-              diagnostics = {},
-            },
-            apply = true,
-          })
-        end
-      })
-    end,
-  }
-
-  config.pyright.setup {
+  vim.lsp.config("pyright", {
     settings = {
       python = {
         analysis = {
@@ -52,9 +31,26 @@ local function setup_language_servers(config, capabilities)
         }
       }
     }
-  }
+  })
 
-  config.yamlls.setup {}
+  vim.lsp.config("kotlin_language_server", {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+
+      local group = vim.api.nvim_create:augroup("kotlin_organize_imports_" .. bufnr, { clear = true })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = group,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.code_action({
+            context = { only = { "source.organizeImports" }, diagnostics = {} },
+            apply = true,
+          })
+        end,
+      })
+    end,
+  })
 end
 
 return {
@@ -82,12 +78,12 @@ return {
         update_in_insert = false,
       })
 
-      setup_language_servers(require("lspconfig"), require('blink.cmp').get_lsp_capabilities())
+      setup_language_servers()
       enable_folding_expression()
 
       -- Auto format the file when it's saved
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('my.lsp', {}),
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("my.lsp", {}),
         callback = function(args)
           local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
           if not client then return end
@@ -95,8 +91,8 @@ return {
           -- Set LSP mappings
           mappings.set_nkey_mappings(args)
 
-          if client:supports_method('textDocument/formatting') then
-            vim.api.nvim_create_autocmd('BufWritePre', {
+          if client:supports_method("textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = args.buf,
               callback = function()
                 vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })

@@ -1,23 +1,21 @@
 return {
+  { "mason-org/mason.nvim", opts = {} },
   {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        -- add "rust_analyzer" here to install rust, for example
-        ensure_installed = {
-          "lua_ls",
-          "html",
-          "lemminx",
-          "kotlin_language_server",
-          "yamlls",
-        }
-      })
-    end
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      "mason-org/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    opts = {
+      ensure_installed = {
+        "html",
+        "kotlin_language_server",
+        "lemminx",
+        "lua_ls",
+        "pyright",
+        "yamlls",
+      },
+      automatic_enable = true,
+    },
   }
 }
