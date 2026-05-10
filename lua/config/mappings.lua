@@ -16,6 +16,11 @@ utils.set_nkey("q", utils.force_close_current_window, { desc = "Force close curr
 utils.set_nkey("Q", utils.force_close_all_windows, { desc = "Force close all windows" })
 -- endregion windows
 
+-- region code actions
+utils.set_nkey("ca", utils.show_code_actions, { desc = "Show code actions on the status line" })
+utils.set_nkey("cd", utils.show_code_diagnostics, { desc = "Show code diagnostic on the status line" })
+-- endregion code actions
+
 -- region quickfix list
 utils.set_key("n", "<M-q>", "lua vim.diagnostic.setqflist()") -- search for quick fixes
 utils.set_key("n", "<M-o>", "<cmd>copen<CR>")                 -- opens quick fix list
