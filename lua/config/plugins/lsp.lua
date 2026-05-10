@@ -16,6 +16,13 @@ local function setup_language_servers()
     capabilities = require("blink.cmp").get_lsp_capabilities(),
   })
 
+  vim.lsp.config("ltex", {
+    settings = {
+      ltex = { language = "en-GB" },
+    },
+    filetypes = { "markdown", "text", "gitcommit", "lua" },
+  })
+
   vim.lsp.config("lua_ls", {})
   vim.lsp.config("yamlls", {})
   vim.lsp.config("html", { filetypes = { "html", "xml" } })
@@ -101,6 +108,6 @@ return {
           end
         end,
       })
-    end
+    end,
   }
 }

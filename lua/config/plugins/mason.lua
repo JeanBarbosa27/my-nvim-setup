@@ -11,6 +11,7 @@ return {
         "html",
         "kotlin_language_server",
         "lemminx",
+        "ltex",
         "lua_ls",
         "pyright",
         "yamlls",
