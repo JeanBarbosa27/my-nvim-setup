@@ -18,9 +18,14 @@ local function setup_language_servers()
 
   vim.lsp.config("ltex", {
     settings = {
-      ltex = { language = "en-GB" },
+      ltex = {
+        language = "en-GB",
+        dictionary = {
+          ["en-GB"] = { "NeoVim", "nvim" },
+        },
+      },
     },
-    filetypes = { "markdown", "text", "gitcommit", "lua" },
+    filetypes = { "markdown", "text", "gitcommit" },
   })
 
   vim.lsp.config("lua_ls", {})
