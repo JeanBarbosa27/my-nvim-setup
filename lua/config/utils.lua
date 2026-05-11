@@ -18,6 +18,10 @@ function M.set_vkey(key, callback, opt)
   M.set_key_with_leader("v", key, callback, opt)
 end
 
+function M.set_tkey(key, callback, opt)
+  M.set_key("t", key, callback, opt)
+end
+
 -- endregion key map helpers
 
 -- region clipboard helpers
