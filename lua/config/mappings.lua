@@ -3,10 +3,10 @@ local utils = require("config.utils")
 -- region normal mode
 -- region buffers
 utils.set_nkey("bl", utils.list_buffers, { desc = "List buffers" })
-utils.set_nkey("bx", utils.close_current_buffer, { desc = "Close current buffer" })
-utils.set_nkey("bw", utils.save_current_buffer, { desc = "Save current buffer" })
-utils.set_nkey("bW", utils.save_all_buffers, { desc = "Save all buffers" })
-utils.set_nkey("bX", utils.save_and_close_current_buffer, { desc = "Save and close current buffer" })
+utils.set_nkey("bX", utils.close_current_buffer, { desc = "Close current buffer" })
+utils.set_nkey("bW", utils.save_current_buffer, { desc = "Save current buffer" })
+utils.set_nkey("bw", utils.save_all_buffers, { desc = "Save all buffers" })
+utils.set_nkey("bx", utils.save_and_close_current_buffer, { desc = "Save and close current buffer" })
 utils.set_nkey("bo", utils.close_other_buffers, { desc = "Close all other buffers" })
 -- endregion buffers
 
