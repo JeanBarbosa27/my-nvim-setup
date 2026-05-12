@@ -64,7 +64,13 @@ local function setup_language_servers()
     filetypes = { "markdown", "text", "gitcommit" },
   })
 
-  vim.lsp.config("lua_ls", {})
+  vim.lsp.config("lua_ls", {
+    settings = {
+      Lua = {
+        diagnostics = { globals = { "vim" } }, --only `vim` is allowed
+      },
+    },
+  })
   vim.lsp.config("yamlls", {})
   vim.lsp.config("html", { filetypes = { "html", "xml" } })
   vim.lsp.config("lemmix", { filetypes = { "xml", "xsd", "xsl", "xslt" } })
