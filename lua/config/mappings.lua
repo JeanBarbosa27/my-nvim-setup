@@ -17,7 +17,6 @@ utils.set_nkey("Q", utils.force_close_all_windows, { desc = "Force close all win
 -- endregion windows
 
 -- region code actions
-utils.set_nkey("ca", utils.show_code_actions, { desc = "Show code actions on the status line" })
 utils.set_nkey("cd", utils.show_code_diagnostics, { desc = "Show code diagnostic on the status line" })
 -- endregion code actions
 

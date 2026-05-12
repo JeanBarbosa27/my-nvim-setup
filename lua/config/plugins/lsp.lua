@@ -1,5 +1,3 @@
-local mappings = require("config.lsp.mappings")
-
 -- This function is used to enable the folding via LSP. It's usefull to fold yaml and Python (which are indent based)
 local function enable_folding_expression()
   vim.o.foldmethod = "expr"
@@ -9,6 +7,44 @@ local function enable_folding_expression()
   vim.o.foldlevelstart = 99
   vim.o.foldenable = true
 end
+
+local organise_imports_on_save_for = {
+  kotlin_language_server = true,
+  ruff = true,
+  -- gopls = true, -- uncomment when adding Golang support
+  -- ts_ls = true, -- uncomment when adding TypeScript support
+}
+
+-- region LSP helpers
+-- Set up autocmd that asks the LSP to organise imports on every save.
+--
+---@param client vim.lsp.Client The LSP client (the you one got from `on_attach` / LspAttach).
+---@param bufnr integer         Buffer the autocmd is local to.
+---@param opts? {kind?: string} Kind: LSP code action kind. Defaults to "source.organizeImports".
+local function organise_imports_on_save(client, bufnr, opts)
+  opts = opts or {}
+  local kind = opts.kind or "source.organizeImports"
+
+  if not client:supports_method("textDocument/codeAction") then return end
+
+  local organise_import_group = vim.api.nvim_create_augroup(
+    ("lsp_organize_imports_%d_%d"):format(client.id, bufnr),
+    { clear = true }
+  )
+
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = organise_import_group,
+    buffer = bufnr,
+    desc = ("LSP %s: %s on save"):format(client.name, kind),
+    callback = function()
+      vim.lsp.buf.code_action({
+        context = { only = { kind }, diagnostics = {} },
+        apply = true,
+      })
+    end
+  })
+end
+-- endregion LSP helpers
 
 local function setup_language_servers()
   -- Global defaults applied to every server
@@ -53,21 +89,9 @@ local function setup_language_servers()
   vim.lsp.config("ruff", {})
 
   vim.lsp.config("kotlin_language_server", {
-    on_attach = function(client, bufnr)
+    on_attach = function(client, _)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
-
-      local group = vim.api.nvim_create:augroup("kotlin_organize_imports_" .. bufnr, { clear = true })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = group,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.code_action({
-            context = { only = { "source.organizeImports" }, diagnostics = {} },
-            apply = true,
-          })
-        end,
-      })
     end,
   })
 end
@@ -102,19 +126,27 @@ return {
 
       -- Auto format the file when it's saved
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("my.lsp", {}),
+        group = vim.api.nvim_create_augroup("my.lsp", { clear = true }),
         callback = function(args)
           local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
           if not client then return end
 
-          -- Set LSP mappings
-          mappings.set_nkey_mappings(args)
+          -- Organise imports on save for language server from organise_imports_on_save table
+          if organise_imports_on_save_for[client.name] then
+            organise_imports_on_save(client, args.buf)
+          end
 
           if client:supports_method("textDocument/formatting") then
+            local current_buffer = args.buf
+            local format_group = vim.api.nvim_create_augroup(
+              ("lsp_format_%d_%d"):format(client.id, current_buffer),
+              { clear = true }
+            )
             vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = args.buf,
+              group = format_group,
+              buffer = current_buffer,
               callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+                vim.lsp.buf.format({ bufnr = current_buffer, id = client.id, timeout_ms = 1000 })
               end,
             })
           end
