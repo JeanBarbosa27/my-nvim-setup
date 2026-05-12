@@ -21,7 +21,7 @@ local function setup_language_servers()
       ltex = {
         language = "en-GB",
         dictionary = {
-          ["en-GB"] = { "NeoVim", "nvim" },
+          ["en-GB"] = { "NeoVim", "nvim", "Octo", "octo", "Ripgrep", "ripgrep" },
         },
       },
     },
