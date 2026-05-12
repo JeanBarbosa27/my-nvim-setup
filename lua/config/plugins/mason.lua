@@ -14,6 +14,7 @@ return {
         "ltex",
         "lua_ls",
         "pyright",
+        "ruff",
         "yamlls",
       },
       automatic_enable = true,

@@ -40,10 +40,17 @@ local function setup_language_servers()
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           diagnosticMode = "openFilesOnly",
+          -- let ruff handle these:
+          diagnosticSeverityOverrides = {
+            reportUnusedImport     = "none",
+            reportUnusedVariable   = "none",
+            reportUnusedExpression = "none",
+          },
         }
       }
     }
   })
+  vim.lsp.config("ruff", {})
 
   vim.lsp.config("kotlin_language_server", {
     on_attach = function(client, bufnr)
