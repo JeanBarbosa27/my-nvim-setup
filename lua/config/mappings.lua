@@ -3,10 +3,10 @@ local utils = require("config.utils")
 -- region normal mode
 -- region buffers
 utils.set_nkey("bl", utils.list_buffers, { desc = "List buffers" })
-utils.set_nkey("bx", utils.close_current_buffer, { desc = "Close current buffer" })
-utils.set_nkey("bw", utils.save_current_buffer, { desc = "Save current buffer" })
-utils.set_nkey("bW", utils.save_all_buffers, { desc = "Save all buffers" })
-utils.set_nkey("bX", utils.save_and_close_current_buffer, { desc = "Save and close current buffer" })
+utils.set_nkey("bX", utils.close_current_buffer, { desc = "Close current buffer" })
+utils.set_nkey("bW", utils.save_current_buffer, { desc = "Save current buffer" })
+utils.set_nkey("bw", utils.save_all_buffers, { desc = "Save all buffers" })
+utils.set_nkey("bx", utils.save_and_close_current_buffer, { desc = "Save and close current buffer" })
 utils.set_nkey("bo", utils.close_other_buffers, { desc = "Close all other buffers" })
 -- endregion buffers
 
@@ -15,6 +15,10 @@ utils.set_nkey("X", utils.save_and_close_all_windows, { desc = "Save and close a
 utils.set_nkey("q", utils.force_close_current_window, { desc = "Force close current windows" })
 utils.set_nkey("Q", utils.force_close_all_windows, { desc = "Force close all windows" })
 -- endregion windows
+
+-- region code actions
+utils.set_nkey("cd", utils.show_code_diagnostics, { desc = "Show code diagnostic on the status line" })
+-- endregion code actions
 
 -- region quickfix list
 utils.set_key("n", "<M-q>", "lua vim.diagnostic.setqflist()") -- search for quick fixes
@@ -37,6 +41,13 @@ utils.set_nkey("st", function()
 
   job_id = vim.bo.channel
 end)
+
+utils.set_nkey("tt", function()
+  vim.cmd("tabnew")
+  vim.cmd.term()
+end, { desc = "Open a new terminal on another tab" })
+
+utils.set_tkey([[<C-\>]], [[<C-\><C-n>]], { desc = "Exit back to normal mode on terminal" })
 
 utils.set_nkey("ex", function()
   -- This is only an example on how we can use the terminal into nvim, but imagine running commands like unit tests,

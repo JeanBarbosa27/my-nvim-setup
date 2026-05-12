@@ -1,6 +1,6 @@
 local M = {}
 
--- region keymap helpers
+-- region key map helpers
 function M.set_key(mode, key, callback, opts)
   local keymap_opts = opts or {}
   vim.keymap.set(mode, key, callback, keymap_opts)
@@ -18,7 +18,11 @@ function M.set_vkey(key, callback, opt)
   M.set_key_with_leader("v", key, callback, opt)
 end
 
--- endregion keymap helpers
+function M.set_tkey(key, callback, opt)
+  M.set_key("t", key, callback, opt)
+end
+
+-- endregion key map helpers
 
 -- region clipboard helpers
 function M.copy_to_clipboard(object_to_copy)
@@ -52,6 +56,17 @@ function M.copy_selection_to_clipboard()
 end
 
 -- region clipboard helpers
+
+-- region code actions
+function M.show_code_actions()
+  vim.lsp.buf.code_action()
+end
+
+function M.show_code_diagnostics()
+  vim.diagnostic.open_float()
+end
+
+-- endregion code actions
 
 -- region file helpers
 function M.get_file_name()

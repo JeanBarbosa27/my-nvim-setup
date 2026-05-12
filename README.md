@@ -1,8 +1,7 @@
-# My NVIM Setup
+# My nvim Setup
 
-This is my nvim setup which was built from source, adding each configuration, options, mappings and plugins manually
-rather than using flavors. Why? Well so this way I have more control on nvim's behaviour and it'll work exactly how I
-need.
+This is my nvim setup which was built from source, adding each configuration, options, mappings and plug-ins manually
+rather than using flavours. Why? To have more control on nvim's behaviour, working exactly how I need.
 
 ## Dependencies
 
@@ -45,8 +44,8 @@ gh \
 ```
 
 > [!NOTE]
-> - ripgrep is required for [Telescope](https://github.com/nvim-telescope/telescope.nvim) plugin;
-> - Github CLI is required for [Octo](https://github.com/pwntester/octo.nvim) plugin;
+> - Ripgrep is required for [Telescope](https://github.com/nvim-telescope/telescope.nvim) plug-in;
+> - GitHub CLI is required for [Octo](https://github.com/pwntester/octo.nvim) plug-in;
 
 #### NodeJS
 
@@ -68,7 +67,7 @@ Set the version as the default one `nvm default <THE_CHOSEN_VERSION>`.
 #### Python
 
 - Install using curl with the command `curl https://pyenv.run | bash`
-- Add these environment variable into `~/.bashrc` or `~/.zshrc`:
+- Add these environments variable into `~/.bashrc` or `~/.zshrc`:
 
 ```bash
 export PYENV_ROOT="$HOME/.pyenv"
