@@ -47,7 +47,7 @@ utils.set_nkey("tt", function()
   vim.cmd.term()
 end, { desc = "Open a new terminal on another tab" })
 
-utils.set_tkey("<Esc><Esc>", [[<C-\><C-n>]], { desc = "Exit back to normal mode on terminal" })
+utils.set_tkey([[<C-\>]], [[<C-\><C-n>]], { desc = "Exit back to normal mode on terminal" })
 
 utils.set_nkey("ex", function()
   -- This is only an example on how we can use the terminal into nvim, but imagine running commands like unit tests,
