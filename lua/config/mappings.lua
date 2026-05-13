@@ -38,13 +38,16 @@ utils.set_nkey("st", function()
   vim.cmd.wincmd("L")
   -- FIXME: Find a way to get this as percentage, since on small screens this breaks the view
   vim.api.nvim_win_set_width(0, 110)
-
+  vim.opt.number = true
+  vim.opt.relativenumber = true
   job_id = vim.bo.channel
 end)
 
 utils.set_nkey("tt", function()
   vim.cmd("tabnew")
   vim.cmd.term()
+  vim.opt.number = true
+  vim.opt.relativenumber = true
 end, { desc = "Open a new terminal on another tab" })
 
 utils.set_tkey([[<C-\>]], [[<C-\><C-n>]], { desc = "Exit back to normal mode on terminal" })
