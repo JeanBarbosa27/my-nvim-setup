@@ -2,6 +2,7 @@ local set = vim.opt
 
 set.clipboard = "unnamedplus"
 set.colorcolumn = "122"
+set.ignorecase = true
 set.number = true
 set.relativenumber = true
 set.spell = true
