@@ -34,8 +34,9 @@ function M.find_in_workspace(builtins)
 
   -- find text
   utils.set_nkey("F", function()
-    builtins.live_grep({ hidden = true })
-  end
+      builtins.live_grep({ hidden = true, path_display = { shorten = 3 } })
+    end,
+    { desc = "Find text though the whole project" }
   )
 
   -- find symbols in the whole project
