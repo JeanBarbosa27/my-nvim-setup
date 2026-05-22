@@ -146,7 +146,7 @@ end
 function M.save_and_close_current_buffer()
   vim.cmd("w")
   vim.cmd("bd")
-  print(vim.fn.expand("%:t") .. "saved and closed!")
+  print(vim.fn.expand("%:t") .. " saved and closed!")
 end
 
 function M.close_other_buffers()
