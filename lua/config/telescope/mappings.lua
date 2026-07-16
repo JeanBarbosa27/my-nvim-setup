@@ -19,7 +19,10 @@ end
 function M.find_in_workspace(builtins)
   -- find files in project root
   utils.set_nkey("fp", function()
-    builtins.find_files({ hidden = true })
+    builtins.find_files({
+      hidden = true,
+      find_command = { "rg", "--files", "--glob", "!**/.git/*" },
+    })
   end)
 
   -- find files in current file directory
@@ -31,8 +34,9 @@ function M.find_in_workspace(builtins)
 
   -- find text
   utils.set_nkey("F", function()
-    builtins.live_grep({ hidden = true })
-  end
+      builtins.live_grep({ hidden = true, path_display = { shorten = 3 } })
+    end,
+    { desc = "Find text though the whole project" }
   )
 
   -- find symbols in the whole project

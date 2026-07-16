@@ -8,6 +8,7 @@ return {
     },
     opts = {
       ensure_installed = {
+        "gopls",
         "html",
         "kotlin_language_server",
         "lemminx",

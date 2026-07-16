@@ -11,7 +11,7 @@ end
 local organise_imports_on_save_for = {
   kotlin_language_server = true,
   ruff = true,
-  -- gopls = true, -- uncomment when adding Golang support
+  gopls = true,
   -- ts_ls = true, -- uncomment when adding TypeScript support
 }
 
