@@ -46,6 +46,8 @@ local function organise_imports_on_save(client, bufnr, opts)
 end
 -- endregion LSP helpers
 
+-- WARN: don't ever add "rust_analyzer" to `setup_language_servers` function. It's managed by `rustaceanvim` plugin,
+-- doing so would add multiple rust clients at the same buffer.
 local function setup_language_servers()
   -- Global defaults applied to every server
   vim.lsp.config("*", {
@@ -57,7 +59,17 @@ local function setup_language_servers()
       ltex = {
         language = "en-GB",
         dictionary = {
-          ["en-GB"] = { "NeoVim", "nvim", "Octo", "octo", "Ripgrep", "ripgrep" },
+          ["en-GB"] = {
+            "Golang",
+            "NeoVim",
+            "Neovim",
+            "Octo",
+            "Ripgrep",
+            "neovim",
+            "nvim",
+            "octo",
+            "ripgrep",
+          },
         },
       },
     },
