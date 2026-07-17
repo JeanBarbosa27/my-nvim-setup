@@ -9,7 +9,7 @@ return {
       {
         "jay-babu/mason-nvim-dap.nvim",
         dependencies = "mason-org/mason.nvim",
-        opts = { ensure_installed = { "delve" } },
+        opts = { ensure_installed = { "delve", "codelldb" } },
       },
 
       -- Go-specific dap plugin:

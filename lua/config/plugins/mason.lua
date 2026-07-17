@@ -7,6 +7,8 @@ return {
       "neovim/nvim-lspconfig",
     },
     opts = {
+      -- WARN: don't ever add "rust_analyzer" to `ensure_installed` table. It's managed by `rustaceanvim` plugin, doing
+      -- so would add multiple rust clients at the same buffer.
       ensure_installed = {
         "gopls",
         "html",
@@ -18,7 +20,9 @@ return {
         "ruff",
         "yamlls",
       },
-      automatic_enable = true,
+      automatic_enable = {
+        exclude = { "rust_analyzer" },
+      },
     },
   }
 }
