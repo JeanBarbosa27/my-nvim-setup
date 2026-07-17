@@ -130,6 +130,11 @@ sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
 
 Then check for the version with the command `nvim --version`.
 
+## Adding words to spell checker
+
+This is configured on `lua/config/plugins/lsp.lua` file, under `ltex` plug-in configuration, just add new words to 
+`ltex.dictionary` accordingly.
+
 ## Mappings
 
 <!-- TODO: Add how mappings are setup -->
