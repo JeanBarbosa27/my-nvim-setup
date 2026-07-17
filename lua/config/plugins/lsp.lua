@@ -112,6 +112,16 @@ local function setup_language_servers()
       client.server_capabilities.documentRangeFormattingProvider = false
     end,
   })
+
+  vim.lsp.config("gopls", {
+    settings = {
+      gopls = {
+        staticcheck = true,
+        gofumpt = true,
+        hints = { parametersNames = true, assignVariableTypes = true },
+      },
+    },
+  })
 end
 
 return {
@@ -154,6 +164,12 @@ return {
             organise_imports_on_save(client, args.buf)
           end
 
+          -- Shows parameter names and inferred types
+          if client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+          end
+
+          -- Autoformat on save
           if client:supports_method("textDocument/formatting") then
             local current_buffer = args.buf
             local format_group = vim.api.nvim_create_augroup(
