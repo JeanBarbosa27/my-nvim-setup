@@ -92,6 +92,26 @@ pyenv global <THE_CHOSEN_VERSION>
 - Check available Java versions `sdk list java`
 - Install one of them, e.g., `sdk install java 21.0.11-tem`
 
+#### Golang
+
+It's setup using `gopls` as language server and `delve` plug-in in conjunction with `dap` and `dap-ui`, to make it
+possible to run debug sessions. 
+
+Basically follow the Golang official documentation to install it on the system, so when opening Go files, it'll have
+all required support.
+
+#### Rust
+
+It's setup using `rustaceanvim` and `codelldb` plug-ins, whose depend on `rust-analyzer` (that's why it's required to
+be added on the 2nd step below). Also configured on `dap.vim` to use `
+
+1. Follow the Rust official documentation to install it on the system;
+2. Run `rustup component add rust-analyzer`, so when opening Rust files, it'll have all required support.
+
+> [!NOTE]
+> Key mappings for both Golang and Rust debugging session are set directly under `keys` configuration on `nvim-dap.lua`
+> file.
+
 
 ### Nvim
 
