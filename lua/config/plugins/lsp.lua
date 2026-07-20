@@ -159,6 +159,14 @@ return {
           local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
           if not client then return end
 
+          -- LSP navigation keymaps (buffer-local, only active while a server is attached)
+          local function map(keys, fn, desc)
+            vim.keymap.set("n", keys, fn, { buffer = args.buf, desc = "LSP: " .. desc })
+          end
+          map("gd", vim.lsp.buf.definition, "Go to definition")
+          map("gD", vim.lsp.buf.declaration, "Go to declaration")
+          map("gy", vim.lsp.buf.type_definition, "Go to type definition")
+
           -- Organise imports on save for language server from organise_imports_on_save table
           if organise_imports_on_save_for[client.name] then
             organise_imports_on_save(client, args.buf)
