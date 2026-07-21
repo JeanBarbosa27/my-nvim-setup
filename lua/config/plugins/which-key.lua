@@ -5,8 +5,11 @@ return {
     opts = {
       spec = {
         { "<space>b",  group = "Buffers" },
-        { "<space>c",  group = "Copy / Code" },
+        { "<space>c",  group = "Copy" },
+        { "<space>cd", group = "Copy directory operations" },
         { "<space>cf", group = "Copy file operations" },
+        { "<space>cr", group = "Copy root project operations" },
+        { "<space>C",  group = "Code" },
         { "<space>d",  group = "Debug / Diff View" },
         { "<space>db", group = "Debug options" },
         { "<space>dv", group = "Diff View" },

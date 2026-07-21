@@ -75,7 +75,7 @@ function M.find_config_files(builtins)
 end
 
 function M.lsp_diagnostics(builtins)
-  utils.set_nkey("cm", function()
+  utils.set_nkey("Cm", function()
     builtins.diagnostics({ bufnr = 0 })
   end, { desc = "Diagnostics for current buffer" })
 end
