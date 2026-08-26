@@ -15,6 +15,10 @@ local organise_imports_on_save_for = {
   -- ts_ls = true, -- uncomment when adding TypeScript support
 }
 
+local format_on_save_excluded_filetypes = {
+  yaml = true,
+}
+
 -- region LSP helpers
 -- Set up autocmd that asks the LSP to organise imports on every save.
 --
@@ -178,7 +182,8 @@ return {
           end
 
           -- Autoformat on save
-          if client:supports_method("textDocument/formatting") then
+          if not format_on_save_excluded_filetypes[vim.bo[args.buf].filetype]
+              and client:supports_method("textDocument/formatting") then
             local current_buffer = args.buf
             local format_group = vim.api.nvim_create_augroup(
               ("lsp_format_%d_%d"):format(client.id, current_buffer),
