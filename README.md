@@ -16,31 +16,31 @@ Here is an example considering Ubuntu with `apt` as package manager:
 ```bash
 sudo apt update -y && sudo apt install -y \
 build-essential \
-make \
-libssl-dev \
-zlib1g-dev \
-libbz2-dev \
-libreadline-dev \
-libsqlite3-dev \
-libncursesw5-dev \
-xz-utils \
-tk-dev \
-libxml2-dev \
-libxmlsec1-dev \
-libffi-dev \
-liblzma-dev \
-unzip \
-zip \
-wget \
-curl \
-llvm \
-fd-find \
-ninja-build \
-gettext \
 cmake \
 curl \
-ripgrep \
+fd-find \
+gettext \
 gh \
+libbz2-dev \
+libffi-dev \
+libfuse2t64 \
+liblzma-dev \
+libncursesw5-dev \
+libreadline-dev \
+libsqlite3-dev \
+libssl-dev \
+libxml2-dev \
+libxmlsec1-dev \
+llvm \
+make \
+ninja-build \
+ripgrep \
+tk-dev \
+unzip \
+wget \
+xz-utils \
+zip \
+zlib1g-dev \
 ```
 
 > [!NOTE]
@@ -116,9 +116,10 @@ be added on the 2nd step below). Also configured on `dap.vim` to use `
 ### Nvim
 
 When using Linux either via main computer OS or WSL, using the tarball is preferred, since you'll get more up-to-date
-release. Take a look at [Neovim's GitHub project release list][^1] to get the latest one.
+release, since this setup requires Nvim from v0.11+. Take a look at [Neovim's GitHub project release list][^1] to get
+the latest one.
 
-Use these commands to install replacing `${VERSION}` by the version you chose from the release list:
+Use these commands to install replacing `${VERSION}` by the version you chose from the release list, e.g. `v0.11.7`:
 
 ```bash
 curl -LO https://github.com/neovim/neovim/releases/download/${VERSION}/nvim-linux-x86_64.tar.gz
