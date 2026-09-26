@@ -16,6 +16,7 @@ end
 return {
   {
     "nvim-java/nvim-java",
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
