@@ -10,7 +10,7 @@ return {
       -- WARN: don't ever add "rust_analyzer" to `ensure_installed` table. It's managed by `rustaceanvim` plugin, doing
       -- so would add multiple rust clients at the same buffer.
       ensure_installed = {
-        "gopls",
+        -- "gopls",
         "html",
         "kotlin_language_server",
         "lemminx",
