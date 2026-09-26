@@ -140,7 +140,8 @@ end
 
 function M.save_all_buffers()
   vim.cmd("wa")
-  print("All buffers saved!")
+  local datetime = os.date()
+  print("All buffers saved at " .. datetime)
 end
 
 function M.save_and_close_current_buffer()
