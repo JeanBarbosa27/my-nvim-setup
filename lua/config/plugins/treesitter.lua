@@ -13,7 +13,6 @@ return {
           "gosum",
           "gowork",
           "html",
-          "kotlin",
           "lua",
           "markdown",
           "markdown_inline",

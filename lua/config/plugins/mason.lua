@@ -12,7 +12,6 @@ return {
       ensure_installed = {
         -- "gopls",
         "html",
-        "kotlin_language_server",
         "lemminx",
         "ltex",
         "lua_ls",

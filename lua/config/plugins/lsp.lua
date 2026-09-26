@@ -9,7 +9,6 @@ local function enable_folding_expression()
 end
 
 local organise_imports_on_save_for = {
-  kotlin_language_server = true,
   ruff = true,
   gopls = true,
   -- ts_ls = true, -- uncomment when adding TypeScript support
@@ -109,13 +108,6 @@ local function setup_language_servers()
     }
   })
   vim.lsp.config("ruff", {})
-
-  vim.lsp.config("kotlin_language_server", {
-    on_attach = function(client, _)
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-    end,
-  })
 
   vim.lsp.config("gopls", {
     settings = {
