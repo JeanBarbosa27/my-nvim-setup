@@ -15,6 +15,7 @@ return {
         "lemminx",
         "ltex",
         "lua_ls",
+        "marksman",
         "pyright",
         "ruff",
         "yamlls",

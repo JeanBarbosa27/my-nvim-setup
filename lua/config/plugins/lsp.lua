@@ -89,6 +89,7 @@ local function setup_language_servers()
   vim.lsp.config("yamlls", {})
   vim.lsp.config("html", { filetypes = { "html", "xml" } })
   vim.lsp.config("lemmix", { filetypes = { "xml", "xsd", "xsl", "xslt" } })
+  vim.lsp.config("marksman", {}) -- setup for markdown files
 
   vim.lsp.config("pyright", {
     settings = {
