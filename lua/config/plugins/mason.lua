@@ -15,6 +15,7 @@ return {
         "lemminx",
         "ltex",
         "lua_ls",
+        "markdown_oxide",
         "pyright",
         "ruff",
         "yamlls",
