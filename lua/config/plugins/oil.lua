@@ -22,6 +22,15 @@ return {
           -- Show files and directories that start with "."
           show_hidden = true,
         },
+        preview_win = {
+          update_on_cursor_moved = true, -- Auto-update preview when cursor moves
+          preview_mode = "fast_scratch", -- "load" | "scratch" | "fast_scratch"
+          disable_preview = function(filename)
+            -- If want to skip preview for specific files, return true on a if statement
+            return false
+          end,
+          win_options = {}, -- Window-local options for the preview buffer
+        },
         mappings.set_normal_key_maps()
       }
     end
