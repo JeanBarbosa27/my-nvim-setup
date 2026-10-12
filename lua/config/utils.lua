@@ -129,8 +129,8 @@ function M.list_buffers()
 end
 
 function M.close_current_buffer()
+  print(vim.fn.expand("%:.") .. " closed!")
   vim.cmd("bd")
-  print(vim.fn.expand("%:t") .. " closed!")
 end
 
 function M.save_current_buffer()
@@ -146,8 +146,8 @@ end
 
 function M.save_and_close_current_buffer()
   vim.cmd("w")
+  print(vim.fn.expand("%:.") .. " saved and closed!")
   vim.cmd("bd")
-  print(vim.fn.expand("%:t") .. " saved and closed!")
 end
 
 function M.close_other_buffers()
